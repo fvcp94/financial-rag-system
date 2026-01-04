@@ -1,0 +1,70 @@
+# Financial RAG System Configuration
+
+# Embedding Model Configuration - FREE LOCAL EMBEDDINGS
+embeddings:
+  model: "sentence-transformers/all-MiniLM-L6-v2"  # Free local embeddings
+  dimension: 384
+  batch_size: 100
+  normalize: true
+  use_local: true  # Use local sentence-transformers instead of API
+
+# LLM Configuration - FREE OPENROUTER MODELS
+llm:
+  provider: "openrouter"  # Use OpenRouter instead of OpenAI
+  model: "meta-llama/llama-3.2-3b-instruct:free"  # FREE & FAST Llama 3.2 3B
+  # Alternative free models:
+  # - "google/gemini-2.0-flash-exp:free" (more accurate, slower)
+  # - "mistralai/mistral-7b-instruct:free" (balanced)
+  # - "nousresearch/hermes-3-llama-3.1-405b:free" (most powerful, slowest)
+  temperature: 0.1
+  max_tokens: 1000
+  top_p: 0.95
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
+
+# Retrieval Settings
+retrieval:
+  top_k: 4
+  similarity_threshold: 0.7
+  max_context_length: 4000
+
+# Document Chunking
+chunking:
+  chunk_size: 1000
+  chunk_overlap: 200
+  separators: ["\n\n", "\n", ".", "!", "?", ";", ":", " ", ""]
+
+# Vector Store
+vector_store:
+  type: "chromadb"
+  collection_name: "financial_docs"
+  persist_directory: "./data/chroma_db"
+  distance_metric: "cosine"
+
+# Cost Tracking
+cost_limits:
+  daily_max: 10.0  # USD
+  per_query_max: 0.10  # USD
+  warning_threshold: 0.75  # 75% of daily limit
+
+# Caching
+cache:
+  enabled: true
+  ttl: 3600  # seconds
+  max_size: 1000  # number of cached queries
+
+# Monitoring
+monitoring:
+  log_queries: true
+  track_latency: true
+  track_costs: true
+  alert_on_errors: true
+
+# Evaluation
+evaluation:
+  metrics:
+    - "answer_relevance"
+    - "context_precision"
+    - "faithfulness"
+  test_set_size: 50
+  min_acceptable_score: 0.7
