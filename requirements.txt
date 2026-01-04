@@ -1,31 +1,31 @@
-# LangChain & OpenAI
-langchain==0.1.20
-langchain-openai==0.0.8
-langchain-community==0.0.29
-openai==1.14.0
+# Core LangChain - flexible versioning to avoid conflicts
+langchain>=0.1.0
+langchain-openai>=0.0.2
+langchain-community>=0.0.10
+openai>=1.0.0
 
 # Vector Database
-chromadb==0.4.24
+chromadb>=0.4.22
 
 # Embeddings (local - FREE!)
-sentence-transformers==2.5.1
+sentence-transformers>=2.2.0
 
 # PDF Processing
-pypdf==4.1.0
-pdfplumber==0.11.0
-python-docx==1.1.0
+pypdf>=3.17.0
+pdfplumber>=0.10.0
+python-docx>=1.1.0
 
 # API Framework
-fastapi==0.110.0
-uvicorn[standard]==0.27.1
-pydantic==2.6.3
-python-multipart==0.0.9
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
 
-# UI & Visualization
-streamlit==1.32.0
-plotly==5.19.0
-pandas==2.2.1
+# UI & Visualization  
+streamlit>=1.30.0
+plotly>=5.18.0
+pandas>=2.2.0
 
 # Utilities
-python-dotenv==1.0.1
-pyyaml==6.0.1
+python-dotenv>=1.0.0
+pyyaml>=6.0
