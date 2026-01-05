@@ -219,7 +219,7 @@ with tab1:
                         st.metric("Docs Retrieved", response['metrics']['retrieved_docs'])
                     
                     with metric_col3:
-                        st.metric("Total Tokens", f"{response['metrics']['total_tokens']:,}")
+                        st.metric("Total Tokens", f"{response.get('metrics', {}).get('total_tokens', 0):,}")
                     
                     with metric_col4:
                         if show_costs:
