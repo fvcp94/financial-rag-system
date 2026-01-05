@@ -1,4 +1,4 @@
-"""Streamlit UI for Financial RAG System - Clean Light Theme with Upload"""
+"""Streamlit UI for Financial RAG System - PERFECT Light Theme - All Issues Fixed"""
 
 import streamlit as st
 import pandas as pd
@@ -23,7 +23,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Clean Professional Light Theme CSS
+# PERFECT Light Theme CSS - ALL VISIBILITY ISSUES FIXED
 st.markdown("""
 <style>
     /* Light theme colors */
@@ -37,22 +37,20 @@ st.markdown("""
         --text-dark: #0f172a;
         --text-gray: #475569;
         --border: #e2e8f0;
-        --shadow: rgba(0, 0, 0, 0.1);
     }
     
-    /* Main background - Clean white */
+    /* Main background */
     .stApp {
         background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
     }
     
-    /* ========== SIDEBAR - Clean & Professional ========== */
+    /* ========== SIDEBAR STYLING ========== */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
         border-right: 3px solid var(--primary) !important;
         box-shadow: 4px 0 20px rgba(0, 102, 204, 0.1) !important;
     }
     
-    /* Sidebar headers - Bold Blue */
     section[data-testid="stSidebar"] h3 {
         color: var(--primary) !important;
         font-weight: 800 !important;
@@ -62,7 +60,6 @@ st.markdown("""
         border-bottom: 3px solid var(--primary) !important;
     }
     
-    /* Sidebar subheaders - Purple */
     section[data-testid="stSidebar"] h4 {
         color: var(--secondary) !important;
         font-weight: 700 !important;
@@ -70,7 +67,6 @@ st.markdown("""
         margin: 1rem 0 0.5rem 0 !important;
     }
     
-    /* Sidebar labels - Dark & Bold */
     section[data-testid="stSidebar"] label,
     section[data-testid="stSidebar"] p {
         color: var(--text-dark) !important;
@@ -78,7 +74,6 @@ st.markdown("""
         font-size: 0.95rem !important;
     }
     
-    /* Sidebar select boxes - Clean with border */
     section[data-testid="stSidebar"] select,
     section[data-testid="stSidebar"] .stSelectbox > div > div {
         background: white !important;
@@ -87,7 +82,7 @@ st.markdown("""
         border-radius: 0.5rem !important;
         font-weight: 600 !important;
         font-size: 1rem !important;
-        box-shadow: 0 2px 4px var(--shadow) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
     }
     
     section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
@@ -95,7 +90,6 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(124, 58, 237, 0.2) !important;
     }
     
-    /* Sidebar metrics - Bold & Visible */
     section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
         color: var(--primary) !important;
         font-size: 2rem !important;
@@ -105,7 +99,6 @@ st.markdown("""
     section[data-testid="stSidebar"] [data-testid="stMetricLabel"] {
         color: var(--text-gray) !important;
         font-weight: 600 !important;
-        font-size: 0.95rem !important;
     }
     
     section[data-testid="stSidebar"] [data-testid="stMetricDelta"] {
@@ -113,21 +106,19 @@ st.markdown("""
         font-weight: 700 !important;
     }
     
-    /* Sidebar divider */
     section[data-testid="stSidebar"] hr {
         border-color: var(--border) !important;
         border-width: 2px !important;
         margin: 1.5rem 0 !important;
     }
     
-    /* Sidebar expander */
     section[data-testid="stSidebar"] .streamlit-expanderHeader {
         background: white !important;
         border: 2px solid var(--border) !important;
         border-radius: 0.5rem !important;
         color: var(--text-dark) !important;
         font-weight: 700 !important;
-        box-shadow: 0 2px 4px var(--shadow) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
     }
     
     section[data-testid="stSidebar"] .streamlit-expanderHeader:hover {
@@ -135,12 +126,10 @@ st.markdown("""
         background: #f8fafc !important;
     }
     
-    /* Sidebar sliders */
     section[data-testid="stSidebar"] .stSlider > div > div > div {
         background: var(--primary) !important;
     }
     
-    /* Sidebar checkboxes */
     section[data-testid="stSidebar"] .stCheckbox label {
         color: var(--text-dark) !important;
         font-weight: 600 !important;
@@ -150,7 +139,6 @@ st.markdown("""
         border: 2px solid var(--primary) !important;
     }
     
-    /* Sidebar caption */
     section[data-testid="stSidebar"] .caption {
         color: var(--text-gray) !important;
         font-size: 0.85rem !important;
@@ -160,7 +148,7 @@ st.markdown("""
     
     /* ========== MAIN CONTENT ========== */
     
-    /* Main header with vibrant gradient */
+    /* Main header */
     .main-header {
         font-size: 3.5rem;
         font-weight: 900;
@@ -180,14 +168,14 @@ st.markdown("""
         margin-bottom: 2rem;
     }
     
-    /* Answer card - Clean with left border */
+    /* Answer card */
     .answer-card {
         background: white;
         border-left: 5px solid var(--primary);
         padding: 1.5rem;
         margin: 1rem 0;
         border-radius: 0.5rem;
-        box-shadow: 0 4px 6px var(--shadow);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         color: var(--text-dark);
         font-size: 1.1rem;
         line-height: 1.8;
@@ -215,10 +203,12 @@ st.markdown("""
         margin-bottom: 0.5rem;
     }
     
-    /* Buttons - Vibrant gradient */
+    /* ========== BUTTONS - FIXED FOR VISIBILITY ========== */
+    
+    /* ALL buttons - default style */
     .stButton>button {
         background: linear-gradient(135deg, #0066cc 0%, #7c3aed 100%) !important;
-        color: white !important;
+        color: #ffffff !important;  /* FORCE WHITE TEXT */
         border: none !important;
         border-radius: 0.5rem !important;
         padding: 0.75rem 2rem !important;
@@ -226,14 +216,31 @@ st.markdown("""
         font-size: 1rem !important;
         box-shadow: 0 4px 6px rgba(0, 102, 204, 0.3) !important;
         transition: all 0.3s ease !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;  /* Text shadow for better visibility */
     }
     
     .stButton>button:hover {
         transform: translateY(-2px) !important;
         box-shadow: 0 6px 12px rgba(124, 58, 237, 0.4) !important;
+        color: #ffffff !important;  /* KEEP WHITE ON HOVER */
     }
     
-    /* Tabs - Clean & Modern */
+    .stButton>button:active {
+        color: #ffffff !important;  /* KEEP WHITE WHEN CLICKED */
+    }
+    
+    .stButton>button:focus {
+        color: #ffffff !important;  /* KEEP WHITE WHEN FOCUSED */
+    }
+    
+    /* Make sure button text is ALWAYS visible */
+    .stButton>button * {
+        color: #ffffff !important;
+    }
+    
+    /* ========== END BUTTON FIXES ========== */
+    
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
         background: transparent;
@@ -256,7 +263,7 @@ st.markdown("""
         border-color: transparent;
     }
     
-    /* Metrics - Bold & Clear */
+    /* Metrics */
     [data-testid="stMetricValue"] {
         color: var(--primary);
         font-size: 2.2rem;
@@ -276,7 +283,7 @@ st.markdown("""
         border: 2px solid var(--border);
         color: var(--text-dark);
         font-weight: 600;
-        box-shadow: 0 2px 4px var(--shadow);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     .streamlit-expanderHeader:hover {
@@ -284,7 +291,7 @@ st.markdown("""
         background: #f8fafc;
     }
     
-    /* Success/Error messages */
+    /* Success/Error/Warning/Info messages */
     .stSuccess {
         background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
         border-left: 5px solid var(--success);
@@ -320,7 +327,7 @@ st.markdown("""
         border-radius: 0.5rem;
         color: var(--text-dark);
         font-size: 1rem;
-        box-shadow: 0 2px 4px var(--shadow);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     .stTextArea textarea:focus {
@@ -342,13 +349,20 @@ st.markdown("""
         border-radius: 0.5rem !important;
     }
     
-    /* Headers in main content */
+    /* Headers - DARK AND VISIBLE */
     h1, h2, h3 {
-        color: var(--text-dark);
-        font-weight: 700;
+        color: var(--text-dark) !important;
+        font-weight: 700 !important;
     }
     
-    /* Paragraphs */
+    /* Subheader for "Example queries:" - MAKE IT DARK AND BOLD */
+    .stMarkdown p strong {
+        color: var(--text-dark) !important;
+        font-weight: 700 !important;
+        font-size: 1.05rem !important;
+    }
+    
+    /* Regular paragraphs */
     p {
         color: var(--text-gray);
         line-height: 1.6;
@@ -454,6 +468,7 @@ with tab1:
         height=120
     )
     
+    # FIXED: Make "Example queries:" label DARK and VISIBLE
     st.markdown("**💡 Example queries:**")
     col1, col2, col3 = st.columns(3)
     
