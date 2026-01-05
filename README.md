@@ -253,9 +253,8 @@ MIT License - see [LICENSE](LICENSE) file for details
 ## 📧 Contact
 
 **Febin Varghese**
-- Portfolio: [your-portfolio.com]
-- LinkedIn: [linkedin.com/in/yourprofile]
-- Email: your.email@example.com
+- LinkedIn: https://www.linkedin.com/in/febin-varghese/
+- Email: fvcp1994@gmail.com
 
 ---
 
