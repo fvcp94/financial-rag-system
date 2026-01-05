@@ -1,4 +1,4 @@
-"""Streamlit UI for Financial RAG System - PERFECT Light Theme - All Issues Fixed"""
+"""Streamlit UI for Financial RAG System """
 
 import streamlit as st
 import pandas as pd
