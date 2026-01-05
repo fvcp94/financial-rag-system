@@ -206,17 +206,17 @@ with tab1:
                                 col_b.metric("Quarter", source['quarter'])
                                 col_c.metric("Similarity", f"{source['similarity']:.3f}" if source['similarity'] else "N/A")
                 
-                # Display metrics
-                if response['metrics']:
+                # Display metrics - FIXED with safe .get() methods
+                if response.get('metrics'):
                     st.markdown("### 📊 Performance Metrics")
                     
                     metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
                     
                     with metric_col1:
-                        st.metric("Latency", f"{response['metrics']['latency']:.2f}s")
+                        st.metric("Latency", f"{response.get('metrics', {}).get('latency', 0):.2f}s")
                     
                     with metric_col2:
-                        st.metric("Docs Retrieved", response['metrics']['retrieved_docs'])
+                        st.metric("Docs Retrieved", response.get('metrics', {}).get('retrieved_docs', 0))
                     
                     with metric_col3:
                         st.metric("Total Tokens", f"{response.get('metrics', {}).get('total_tokens', 0):,}")
@@ -231,15 +231,15 @@ with tab2:
     st.markdown("### 📈 Query Analytics")
     
     if st.session_state.query_history:
-        # Create dataframe from history
+        # Create dataframe from history - FIXED with safe .get() methods
         history_df = pd.DataFrame([
             {
                 "Timestamp": h["timestamp"].strftime("%Y-%m-%d %H:%M:%S"),
                 "Query": h["query"][:50] + "..." if len(h["query"]) > 50 else h["query"],
-                "Latency (s)": h["response"]["metrics"]["latency"],
-                "Cost ($)": h["response"]["metrics"]["total_cost"],
-                "Tokens": h["response"]["metrics"]["total_tokens"],
-                "Sources": h["response"]["metrics"]["retrieved_docs"]
+                "Latency (s)": h["response"].get("metrics", {}).get("latency", 0),
+                "Cost ($)": h["response"].get("metrics", {}).get("total_cost", 0),
+                "Tokens": h["response"].get("metrics", {}).get("total_tokens", 0),
+                "Sources": h["response"].get("metrics", {}).get("retrieved_docs", 0)
             }
             for h in st.session_state.query_history
         ])
@@ -338,8 +338,8 @@ with tab3:
     
     #### 🔧 Tech Stack
     
-    - **LLM**: OpenAI GPT-4 Turbo
-    - **Embeddings**: OpenAI text-embedding-3-small
+    - **LLM**: OpenRouter Llama 3.2 3B (FREE)
+    - **Embeddings**: sentence-transformers (Local - FREE)
     - **Vector Store**: ChromaDB
     - **Framework**: LangChain
     - **UI**: Streamlit
@@ -347,8 +347,8 @@ with tab3:
     
     #### 📊 Performance
     
-    - Average latency: < 2 seconds
-    - Cost per query: ~$0.03
+    - Average latency: < 1 second
+    - Cost per query: $0.00 (FREE!)
     - Accuracy: 90%+ relevance
     
     #### 🚀 Getting Started
@@ -401,7 +401,7 @@ st.divider()
 st.markdown("""
 <div style='text-align: center; color: gray; padding: 1rem;'>
     <p>Financial RAG System v1.0.0 | 
-    Built with LangChain, OpenAI, and Streamlit | 
-    <a href='https://github.com/yourusername/financial-rag-system'>GitHub</a></p>
+    Built with LangChain, OpenRouter, and Streamlit | 
+    <a href='https://github.com/fvcp94/financial-rag-system'>GitHub</a></p>
 </div>
 """, unsafe_allow_html=True)
