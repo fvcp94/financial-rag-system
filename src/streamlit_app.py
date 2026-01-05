@@ -1,4 +1,4 @@
-"""Streamlit UI for Financial RAG System - Dark Theme with BRIGHT Visible Sidebar"""
+"""Streamlit UI for Financial RAG System - Clean Light Theme with Upload"""
 
 import streamlit as st
 import pandas as pd
@@ -23,278 +23,335 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Beautiful Dark Theme CSS with ULTRA BRIGHT Sidebar
+# Clean Professional Light Theme CSS
 st.markdown("""
 <style>
-    /* Dark theme colors */
+    /* Light theme colors */
     :root {
-        --primary-color: #00d4ff;
-        --secondary-color: #7c3aed;
-        --accent-color: #f59e0b;
+        --primary: #0066cc;
+        --secondary: #7c3aed;
+        --accent: #f59e0b;
+        --success: #059669;
+        --bg-light: #f8fafc;
+        --bg-white: #ffffff;
+        --text-dark: #0f172a;
+        --text-gray: #475569;
+        --border: #e2e8f0;
+        --shadow: rgba(0, 0, 0, 0.1);
     }
     
-    /* Main background */
+    /* Main background - Clean white */
     .stApp {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
     }
     
-    /* ========== SIDEBAR - ULTRA BRIGHT & VISIBLE ========== */
-    
-    /* Sidebar background with gradient */
+    /* ========== SIDEBAR - Clean & Professional ========== */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1e3a8a 0%, #1e293b 50%, #0f172a 100%) !important;
-        border-right: 3px solid #00d4ff !important;
-        box-shadow: 4px 0 20px rgba(0, 212, 255, 0.3) !important;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+        border-right: 3px solid var(--primary) !important;
+        box-shadow: 4px 0 20px rgba(0, 102, 204, 0.1) !important;
     }
     
-    /* ALL sidebar text - BRIGHT WHITE */
-    section[data-testid="stSidebar"] * {
-        color: #ffffff !important;
-    }
-    
-    /* Sidebar main headers (###) - BRIGHT CYAN WITH GLOW */
+    /* Sidebar headers - Bold Blue */
     section[data-testid="stSidebar"] h3 {
-        color: #00d4ff !important;
+        color: var(--primary) !important;
         font-weight: 800 !important;
         font-size: 1.4rem !important;
-        text-shadow: 0 0 15px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.4) !important;
         margin: 1.5rem 0 1rem 0 !important;
-        padding: 0.5rem 0 !important;
-        border-bottom: 2px solid rgba(0, 212, 255, 0.3) !important;
+        padding-bottom: 0.5rem !important;
+        border-bottom: 3px solid var(--primary) !important;
     }
     
-    /* Sidebar subheaders (####) - BRIGHT PURPLE */
+    /* Sidebar subheaders - Purple */
     section[data-testid="stSidebar"] h4 {
-        color: #a78bfa !important;
+        color: var(--secondary) !important;
         font-weight: 700 !important;
         font-size: 1.15rem !important;
-        text-shadow: 0 0 10px rgba(167, 139, 250, 0.6) !important;
         margin: 1rem 0 0.5rem 0 !important;
     }
     
-    /* Sidebar labels - EXTRA BRIGHT */
-    section[data-testid="stSidebar"] label {
-        color: #f0f9ff !important;
+    /* Sidebar labels - Dark & Bold */
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] p {
+        color: var(--text-dark) !important;
         font-weight: 600 !important;
-        font-size: 1rem !important;
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3) !important;
+        font-size: 0.95rem !important;
     }
     
-    /* Sidebar select boxes - BRIGHT with GLOW */
+    /* Sidebar select boxes - Clean with border */
     section[data-testid="stSidebar"] select,
     section[data-testid="stSidebar"] .stSelectbox > div > div {
-        background: linear-gradient(135deg, #1e40af 0%, #1e293b 100%) !important;
-        color: #ffffff !important;
-        border: 2px solid #00d4ff !important;
+        background: white !important;
+        color: var(--text-dark) !important;
+        border: 2px solid var(--primary) !important;
         border-radius: 0.5rem !important;
         font-weight: 600 !important;
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
+        font-size: 1rem !important;
+        box-shadow: 0 2px 4px var(--shadow) !important;
     }
     
-    /* Sidebar select box hover */
     section[data-testid="stSidebar"] .stSelectbox > div > div:hover {
-        border-color: #7c3aed !important;
-        box-shadow: 0 0 20px rgba(124, 58, 237, 0.5) !important;
+        border-color: var(--secondary) !important;
+        box-shadow: 0 4px 8px rgba(124, 58, 237, 0.2) !important;
     }
     
-    /* Sidebar metrics - BRIGHT */
+    /* Sidebar metrics - Bold & Visible */
     section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
-        color: #00d4ff !important;
+        color: var(--primary) !important;
         font-size: 2rem !important;
         font-weight: 800 !important;
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.6) !important;
     }
     
     section[data-testid="stSidebar"] [data-testid="stMetricLabel"] {
-        color: #e0e7ff !important;
+        color: var(--text-gray) !important;
         font-weight: 600 !important;
         font-size: 0.95rem !important;
     }
     
     section[data-testid="stSidebar"] [data-testid="stMetricDelta"] {
-        color: #10b981 !important;
-        font-weight: 600 !important;
+        color: var(--success) !important;
+        font-weight: 700 !important;
     }
     
-    /* Sidebar divider - GLOWING */
+    /* Sidebar divider */
     section[data-testid="stSidebar"] hr {
-        border-color: rgba(0, 212, 255, 0.5) !important;
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
-        margin: 1rem 0 !important;
+        border-color: var(--border) !important;
+        border-width: 2px !important;
+        margin: 1.5rem 0 !important;
     }
     
-    /* Sidebar caption - VISIBLE */
-    section[data-testid="stSidebar"] .caption {
-        color: #94a3b8 !important;
-        font-size: 0.9rem !important;
-        text-align: center !important;
-    }
-    
-    /* Sidebar expander - BRIGHT */
+    /* Sidebar expander */
     section[data-testid="stSidebar"] .streamlit-expanderHeader {
-        background: linear-gradient(135deg, #1e40af 0%, #1e293b 100%) !important;
-        border: 2px solid rgba(0, 212, 255, 0.4) !important;
+        background: white !important;
+        border: 2px solid var(--border) !important;
         border-radius: 0.5rem !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
+        color: var(--text-dark) !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 4px var(--shadow) !important;
     }
     
     section[data-testid="stSidebar"] .streamlit-expanderHeader:hover {
-        border-color: #00d4ff !important;
-        box-shadow: 0 0 15px rgba(0, 212, 255, 0.4) !important;
+        border-color: var(--primary) !important;
+        background: #f8fafc !important;
     }
     
-    /* Sidebar sliders - VISIBLE */
+    /* Sidebar sliders */
     section[data-testid="stSidebar"] .stSlider > div > div > div {
-        background: #00d4ff !important;
+        background: var(--primary) !important;
     }
     
-    section[data-testid="stSidebar"] .stSlider label {
-        color: #f0f9ff !important;
-    }
-    
-    /* Sidebar checkboxes - BRIGHT */
+    /* Sidebar checkboxes */
     section[data-testid="stSidebar"] .stCheckbox label {
-        color: #f0f9ff !important;
-        font-weight: 500 !important;
+        color: var(--text-dark) !important;
+        font-weight: 600 !important;
     }
     
     section[data-testid="stSidebar"] input[type="checkbox"] {
-        border: 2px solid #00d4ff !important;
+        border: 2px solid var(--primary) !important;
     }
     
-    /* ========== END SIDEBAR STYLING ========== */
+    /* Sidebar caption */
+    section[data-testid="stSidebar"] .caption {
+        color: var(--text-gray) !important;
+        font-size: 0.85rem !important;
+        text-align: center !important;
+        font-weight: 500 !important;
+    }
     
-    /* Main header with gradient */
+    /* ========== MAIN CONTENT ========== */
+    
+    /* Main header with vibrant gradient */
     .main-header {
         font-size: 3.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #f59e0b 100%);
+        font-weight: 900;
+        background: linear-gradient(135deg, #0066cc 0%, #7c3aed 50%, #f59e0b 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
-        padding: 2rem 0;
-        animation: glow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes glow {
-        from { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
-        to { filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.8)); }
+        padding: 2rem 0 1rem 0;
+        filter: drop-shadow(0 4px 6px rgba(0, 102, 204, 0.2));
     }
     
     .subtitle {
         text-align: center;
-        color: #94a3b8;
+        color: var(--text-gray);
         font-size: 1.2rem;
+        font-weight: 500;
         margin-bottom: 2rem;
     }
     
-    /* Answer card with gradient border */
+    /* Answer card - Clean with left border */
     .answer-card {
-        background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%);
-        border-left: 4px solid;
-        border-image: linear-gradient(180deg, #00d4ff, #7c3aed) 1;
+        background: white;
+        border-left: 5px solid var(--primary);
         padding: 1.5rem;
         margin: 1rem 0;
         border-radius: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        color: #f1f5f9;
+        box-shadow: 0 4px 6px var(--shadow);
+        color: var(--text-dark);
         font-size: 1.1rem;
-        line-height: 1.6;
+        line-height: 1.8;
     }
     
-    /* Upload area styling */
+    /* Upload area */
     .upload-area {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        border: 2px dashed rgba(0, 212, 255, 0.5);
+        background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+        border: 3px dashed var(--primary);
         border-radius: 1rem;
-        padding: 2rem;
+        padding: 3rem;
         text-align: center;
         transition: all 0.3s ease;
     }
     
     .upload-area:hover {
-        border-color: rgba(0, 212, 255, 1);
-        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        border-color: var(--secondary);
+        background: linear-gradient(135deg, white 0%, #f8fafc 100%);
+        box-shadow: 0 8px 16px rgba(124, 58, 237, 0.1);
     }
     
-    /* Button styling */
+    .upload-area h3 {
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Buttons - Vibrant gradient */
     .stButton>button {
-        background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
-        color: white;
-        border: none;
-        border-radius: 0.5rem;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #0066cc 0%, #7c3aed 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 0.5rem !important;
+        padding: 0.75rem 2rem !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        box-shadow: 0 4px 6px rgba(0, 102, 204, 0.3) !important;
+        transition: all 0.3s ease !important;
     }
     
     .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 12px rgba(124, 58, 237, 0.4) !important;
     }
     
-    /* Tabs styling */
+    /* Tabs - Clean & Modern */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
         background: transparent;
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        background: white;
         border-radius: 0.5rem 0.5rem 0 0;
-        color: #94a3b8;
-        border: 1px solid rgba(0, 212, 255, 0.2);
+        color: var(--text-gray);
+        border: 2px solid var(--border);
+        border-bottom: none;
         padding: 0.75rem 1.5rem;
-        font-weight: 600;
+        font-weight: 700;
+        font-size: 1rem;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+        background: linear-gradient(135deg, #0066cc 0%, #7c3aed 100%);
         color: white;
         border-color: transparent;
     }
     
-    /* Metrics styling */
+    /* Metrics - Bold & Clear */
     [data-testid="stMetricValue"] {
-        color: #00d4ff;
-        font-size: 2rem;
-        font-weight: 700;
+        color: var(--primary);
+        font-size: 2.2rem;
+        font-weight: 800;
     }
     
-    /* Expander styling */
+    [data-testid="stMetricLabel"] {
+        color: var(--text-gray);
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    
+    /* Expander */
     .streamlit-expanderHeader {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        background: white;
         border-radius: 0.5rem;
-        border: 1px solid rgba(0, 212, 255, 0.2);
+        border: 2px solid var(--border);
+        color: var(--text-dark);
+        font-weight: 600;
+        box-shadow: 0 2px 4px var(--shadow);
+    }
+    
+    .streamlit-expanderHeader:hover {
+        border-color: var(--primary);
+        background: #f8fafc;
     }
     
     /* Success/Error messages */
     .stSuccess {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.2) 100%);
-        border-left: 4px solid #10b981;
-        color: #10b981;
+        background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+        border-left: 5px solid var(--success);
+        border-radius: 0.5rem;
+        padding: 1rem;
     }
     
     .stError {
-        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.2) 100%);
-        border-left: 4px solid #ef4444;
-        color: #ef4444;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+        border-left: 5px solid #ef4444;
+        border-radius: 0.5rem;
+        padding: 1rem;
     }
     
-    /* Text input styling */
-    .stTextArea textarea {
-        background: #1e293b;
-        border: 1px solid rgba(0, 212, 255, 0.3);
+    .stWarning {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+        border-left: 5px solid var(--accent);
         border-radius: 0.5rem;
-        color: #f1f5f9;
+        padding: 1rem;
+    }
+    
+    .stInfo {
+        background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 102, 204, 0.05) 100%);
+        border-left: 5px solid var(--primary);
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+    
+    /* Text input */
+    .stTextArea textarea {
+        background: white;
+        border: 2px solid var(--border);
+        border-radius: 0.5rem;
+        color: var(--text-dark);
+        font-size: 1rem;
+        box-shadow: 0 2px 4px var(--shadow);
     }
     
     .stTextArea textarea:focus {
-        border-color: #00d4ff;
-        box-shadow: 0 0 0 1px #00d4ff;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+    
+    /* File uploader */
+    .stFileUploader {
+        background: white;
+        border: 2px solid var(--border);
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+    
+    /* Dataframe */
+    .dataframe {
+        border: 2px solid var(--border) !important;
+        border-radius: 0.5rem !important;
+    }
+    
+    /* Headers in main content */
+    h1, h2, h3 {
+        color: var(--text-dark);
+        font-weight: 700;
+    }
+    
+    /* Paragraphs */
+    p {
+        color: var(--text-gray);
+        line-height: 1.6;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -314,11 +371,10 @@ if 'rag_pipeline' not in st.session_state:
 if 'query_history' not in st.session_state:
     st.session_state.query_history = []
 
-# Sidebar with BRIGHT visible text
+# Sidebar
 with st.sidebar:
     st.markdown("### ⚙️ Configuration")
     
-    # Filters
     st.markdown("#### 📋 Filters")
     
     st.markdown("**Company:**")
@@ -348,7 +404,6 @@ with st.sidebar:
         label_visibility="collapsed"
     )
     
-    # Advanced settings
     with st.expander("🔧 Advanced Settings"):
         top_k = st.slider(
             "Documents to retrieve",
@@ -363,14 +418,13 @@ with st.sidebar:
     
     st.divider()
     
-    # System stats with bright text
     st.markdown("#### 📊 System Stats")
     try:
         stats = st.session_state.vs_manager.get_collection_stats()
         cost_summary = st.session_state.rag_pipeline.get_cost_summary()
         
         st.metric("📚 Documents", stats.get("total_documents", 0))
-        st.metric("🔍 Queries Today", cost_summary.get("query_count", 0))
+        st.metric("🔍 Queries", cost_summary.get("query_count", 0))
         
         if show_costs:
             st.metric(
@@ -379,10 +433,10 @@ with st.sidebar:
                 delta="100% FREE"
             )
     except Exception as e:
-        st.error(f"Stats unavailable")
+        st.warning("Stats loading...")
     
     st.divider()
-    st.caption("🚀 Built with LangChain • OpenRouter (FREE) • Streamlit")
+    st.caption("🚀 LangChain • OpenRouter (FREE) • Streamlit")
 
 # Main content
 st.markdown('<div class="main-header">📊 Financial Earnings RAG System</div>', unsafe_allow_html=True)
@@ -391,16 +445,13 @@ st.markdown('<div class="subtitle">🤖 AI-Powered Financial Document Analysis �
 # Tabs
 tab1, tab2, tab3, tab4 = st.tabs(["💬 Query", "📤 Upload", "📈 Analytics", "ℹ️ About"])
 
-# [REST OF THE TABS CODE - SAME AS BEFORE]
-# Keeping previous tab implementations...
-
 with tab1:
     st.markdown("### 🔍 Ask a Question")
     
     query = st.text_area(
         "Enter your question:",
         placeholder="e.g., What were Apple's Q3 2024 revenue drivers?",
-        height=100
+        height=120
     )
     
     st.markdown("**💡 Example queries:**")
@@ -418,7 +469,7 @@ with tab1:
     
     if st.button("🔎 Search", type="primary", use_container_width=True):
         if query:
-            with st.spinner("🤔 Analyzing..."):
+            with st.spinner("🤔 Analyzing documents..."):
                 filters = {}
                 if company != "All":
                     filters["company"] = company
@@ -445,18 +496,26 @@ with tab1:
                 st.markdown(f"<div class='answer-card'>{response['answer']}</div>", unsafe_allow_html=True)
                 
                 if response['sources']:
-                    st.markdown(f"### 📚 Sources ({len(response['sources'])} docs)")
+                    st.markdown(f"### 📚 Sources ({len(response['sources'])} documents)")
                     for idx, source in enumerate(response['sources'], 1):
-                        with st.expander(f"📄 {source['company']} - {source['quarter']} {source['year']}", expanded=idx==1):
+                        with st.expander(f"📄 Source {idx}: {source['company']} - {source['quarter']} {source['year']}", expanded=idx==1):
+                            st.markdown("**Content:**")
                             st.text(source['content'])
+                            
+                            if show_metadata:
+                                c1, c2, c3 = st.columns(3)
+                                c1.metric("Page", source['page'])
+                                c2.metric("Quarter", source['quarter'])
+                                c3.metric("Similarity", f"{source['similarity']:.3f}" if source['similarity'] else "N/A")
                 
                 if response.get('metrics'):
-                    st.markdown("### 📊 Metrics")
+                    st.markdown("### 📊 Performance Metrics")
                     c1, c2, c3, c4 = st.columns(4)
                     c1.metric("⚡ Latency", f"{response.get('metrics', {}).get('latency', 0):.2f}s")
                     c2.metric("📄 Docs", response.get('metrics', {}).get('retrieved_docs', 0))
                     c3.metric("🔤 Tokens", f"{response.get('metrics', {}).get('total_tokens', 0):,}")
-                    c4.metric("💰 Cost", f"${response.get('metrics', {}).get('total_cost', 0):.6f}")
+                    if show_costs:
+                        c4.metric("💰 Cost", f"${response.get('metrics', {}).get('total_cost', 0):.6f}")
         else:
             st.warning("⚠️ Please enter a question")
 
@@ -465,29 +524,39 @@ with tab2:
     
     st.markdown("""
     <div class='upload-area'>
-        <h3>📁 Drag and Drop Files</h3>
-        <p style='color: #94a3b8;'>PDF & DOCX • Max 200MB</p>
+        <h3>📁 Drag and Drop Files Here</h3>
+        <p style='color: #475569; font-weight: 500;'>Supported: PDF, DOCX • Max size: 200MB</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("")
     
-    uploaded_file = st.file_uploader("Choose a file", type=['pdf', 'docx'])
+    uploaded_file = st.file_uploader(
+        "Choose a file",
+        type=['pdf', 'docx'],
+        help="Upload financial documents"
+    )
     
     if uploaded_file:
-        st.success(f"✅ {uploaded_file.name}")
+        st.success(f"✅ File selected: **{uploaded_file.name}**")
         
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            doc_company = st.selectbox("Company", ["Apple", "Microsoft", "Google", "Amazon", "Meta"], key="uc")
+            doc_company = st.selectbox(
+                "Company",
+                ["Apple", "Microsoft", "Google", "Amazon", "Meta", "Tesla", "NVIDIA"],
+                key="uc"
+            )
+        
         with col2:
             doc_year = st.number_input("Year", 2020, 2025, 2024, key="uy")
-        with col3:
-            doc_quarter = st.selectbox("Quarter", ["Q1", "Q2", "Q3", "Q4"], key="uq")
         
-        if st.button("🚀 Upload", type="primary", use_container_width=True):
-            with st.spinner("Processing..."):
+        with col3:
+            doc_quarter = st.selectbox("Quarter", ["Q1", "Q2", "Q3", "Q4", "Annual"], key="uq")
+        
+        if st.button("🚀 Process & Upload", type="primary", use_container_width=True):
+            with st.spinner("📄 Processing document..."):
                 try:
                     temp_path = Path(f"/tmp/{uploaded_file.name}")
                     with open(temp_path, "wb") as f:
@@ -498,44 +567,110 @@ with tab2:
                         metadata={
                             "company": doc_company,
                             "year": doc_year,
-                            "quarter": doc_quarter
+                            "quarter": doc_quarter,
+                            "source": uploaded_file.name
                         }
                     )
                     
-                    st.session_state.vs_manager.add_documents(chunks)
-                    stats = st.session_state.vs_manager.get_collection_stats()
+                    st.success(f"✅ Created {len(chunks)} chunks")
                     
-                    st.success(f"🎉 Uploaded! {stats['total_documents']} total docs")
+                    with st.spinner("💾 Adding to database..."):
+                        st.session_state.vs_manager.add_documents(chunks)
+                    
+                    stats = st.session_state.vs_manager.get_collection_stats()
+                    st.success(f"🎉 Upload complete! Total documents: {stats['total_documents']}")
+                    
                     temp_path.unlink()
+                    
+                    c1, c2, c3 = st.columns(3)
+                    c1.metric("📄 Chunks", len(chunks))
+                    c2.metric("📚 Total Docs", stats['total_documents'])
+                    c3.metric("✅ Status", "Ready")
+                    
                 except Exception as e:
                     st.error(f"❌ Error: {e}")
+    
+    st.divider()
+    st.markdown("### 📚 Current Database")
+    try:
+        stats = st.session_state.vs_manager.get_collection_stats()
+        total = stats.get('total_documents', 0)
+        if total > 0:
+            st.info(f"📊 **{total}** documents in database")
+        else:
+            st.warning("📭 No documents yet - upload your first file above!")
+    except:
+        pass
 
 with tab3:
-    st.markdown("### 📈 Analytics")
+    st.markdown("### 📈 Query Analytics")
+    
     if st.session_state.query_history:
-        st.info(f"📊 {len(st.session_state.query_history)} queries in session")
+        history_df = pd.DataFrame([
+            {
+                "Time": h["timestamp"].strftime("%H:%M:%S"),
+                "Query": h["query"][:40] + "..." if len(h["query"]) > 40 else h["query"],
+                "Latency": f"{h['response'].get('metrics', {}).get('latency', 0):.2f}s",
+                "Docs": h["response"].get("metrics", {}).get("retrieved_docs", 0),
+                "Tokens": h["response"].get("metrics", {}).get("total_tokens", 0)
+            }
+            for h in st.session_state.query_history
+        ])
+        
+        st.markdown("#### 📊 Summary")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("🔍 Queries", len(st.session_state.query_history))
+        c2.metric("⚡ Avg Latency", f"{history_df['Latency'].str.replace('s', '').astype(float).mean():.2f}s")
+        c3.metric("💰 Total Cost", "$0.00")
+        c4.metric("✅ Status", "FREE")
+        
+        st.markdown("#### 📋 History")
+        st.dataframe(history_df, use_container_width=True, hide_index=True)
+        
+        if st.button("🗑️ Clear History"):
+            st.session_state.query_history = []
+            st.rerun()
     else:
-        st.info("📭 No queries yet")
+        st.info("📭 No queries yet. Start in the Query tab!")
 
 with tab4:
-    st.markdown("### ℹ️ About")
-    st.markdown("""
-    **Financial RAG System** - Production-ready AI document analysis
+    st.markdown("### ℹ️ About This System")
     
-    **Features:**
-    - 🤖 Free LLM (Llama 3.2 3B)
-    - 💾 Local Embeddings
-    - 📤 Easy Upload
-    - ⚡ Fast Queries
-    - 💰 $0.00 Cost
+    st.markdown("""
+    **Financial RAG System** is a production-ready AI system for analyzing financial documents.
+    
+    #### ⚡ Key Features
+    
+    - 🤖 **Free LLM**: OpenRouter Llama 3.2 3B
+    - 💾 **Local Embeddings**: sentence-transformers
+    - 📤 **Easy Upload**: Drag & drop interface
+    - ⚡ **Fast**: Sub-second response times
+    - 💰 **100% FREE**: No API costs
+    - 📊 **Analytics**: Track performance
+    
+    #### 🚀 How to Use
+    
+    1. **Upload** your financial PDFs in the Upload tab
+    2. **Query** in natural language
+    3. **Get** instant answers with citations
+    4. **Analyze** performance metrics
+    
+    #### 📧 Contact
+    
+    Built by **Febin Varghese**  
+    [GitHub Repository](https://github.com/fvcp94/financial-rag-system)
     """)
 
 st.divider()
 st.markdown("""
 <div style='text-align: center; padding: 1rem;'>
-    <p style='background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%); 
-              -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;'>
-        Financial RAG System v1.0
+    <p style='background: linear-gradient(135deg, #0066cc 0%, #7c3aed 100%); 
+              -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+              font-weight: 800; font-size: 1.2rem;'>
+        Financial RAG System v1.0.0
+    </p>
+    <p style='color: #475569; font-weight: 500;'>
+        LangChain • OpenRouter (FREE) • Streamlit
     </p>
 </div>
 """, unsafe_allow_html=True)
