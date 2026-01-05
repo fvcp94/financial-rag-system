@@ -223,7 +223,7 @@ with tab1:
                     
                     with metric_col4:
                         if show_costs:
-                            st.metric("Cost", f"${response['metrics']['total_cost']:.6f}")
+                            st.metric("Cost", f"${response.get('metrics', {}).get('total_cost', 0):.6f}")
         else:
             st.warning("⚠️ Please enter a question")
 
